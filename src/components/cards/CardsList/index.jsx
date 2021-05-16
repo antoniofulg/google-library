@@ -1,28 +1,46 @@
 import PropTypes from 'prop-types'
 import BookCard from '../BookCard'
-import Column from '../../layouts/Column'
-import { Row } from './styles'
+import Pagination from '../../tools/Pagination'
+import Row from '../../layouts/Row'
+import { CardsListDiv, SearchInfo } from './styles'
 
-const CardsList = ({ books }) => {
+const CardsList = (props) => {
+  const { books, meta, getByPage } = props
+
+  const getResultsInfo = (meta) => {
+    return `${meta.totalItems} livros encontrados`
+  }
+
   return (
-    <Row>
-      {books.map((item) => (
-        <Column key={item.id} mobile='12' tablet='6' desktop='4'>
-          <BookCard
-            thumbnail={item.volumeInfo?.imageLinks?.thumbnail}
-            title={item.volumeInfo?.title}
-            author={item.volumeInfo?.authors}
-            textSnippet={item.searchInfo?.textSnippet}
-            publishedDate={item.volumeInfo?.publishedDate}
-          ></BookCard>
-        </Column>
-      ))}
-    </Row>
+    <>
+      <Row>
+        <SearchInfo>{getResultsInfo(meta)}</SearchInfo>
+      </Row>
+      <Row>
+        <CardsListDiv>
+          {books.map((item) => (
+            <BookCard
+              key={item.id}
+              thumbnail={item.volumeInfo?.imageLinks?.thumbnail}
+              title={item.volumeInfo?.title}
+              author={item.volumeInfo?.authors}
+              textSnippet={item.searchInfo?.textSnippet}
+              publishedDate={item.volumeInfo?.publishedDate}
+            ></BookCard>
+          ))}
+        </CardsListDiv>
+      </Row>
+      <Row>
+        <Pagination meta={meta} getByPage={getByPage}></Pagination>
+      </Row>
+    </>
   )
 }
 
 CardsList.propTypes = {
   books: PropTypes.array,
+  meta: PropTypes.object,
+  getByPage: PropTypes.func,
 }
 
 export default CardsList
