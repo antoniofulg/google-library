@@ -4,61 +4,81 @@ import {
   Title,
   Info,
   Snippet,
-  CardBox,
   CardPreview,
+  CardContent,
+  CardActions,
+  DetailButton,
+  FavButton,
 } from './styles'
 import PropTypes from 'prop-types'
 import { isMatch, format, parse } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import placeholder from '../../../assets/img/placeholder.jpg'
 
+const formatAuthors = (authors = []) => {
+  if (authors.length > 1) {
+    const last = authors.pop()
+    return authors.join(', ').concat(' e ', last)
+  }
+  if (authors.length) return authors[0]
+  return 'Autor Desconhecido'
+}
+
+const formatThumbnail = (thumb) => {
+  if (thumb) return thumb
+  return placeholder
+}
+
+const formatSnippet = (text) => {
+  if (text) return text
+  return 'Descrição não disponível'
+}
+
+const formatPublishedDate = (dateString = '') => {
+  if (isMatch(dateString, 'yyyy-MM-dd')) {
+    const date = parse(dateString, 'yyyy-MM-dd', new Date())
+    return format(date, 'dd MMMM yyyy', { locale: ptBR })
+  }
+  if (isMatch(dateString, 'yyyy')) return dateString
+  return 'Data de publicação indisponível'
+}
+
 const BookCard = (props) => {
-  const formatAuthors = (authors = []) => {
-    if (authors.length > 1) {
-      const last = authors.pop()
-      return authors.join(', ').concat(' e ', last)
-    }
-    if (authors.length) return authors[0]
-    return 'Autor Desconhecido'
-  }
-
-  const formatThumbnail = (thumb) => {
-    if (thumb) return thumb
-    return placeholder
-  }
-
-  const formatPublishedDate = (dateString = '') => {
-    if (isMatch(dateString, 'yyyy-MM-dd')) {
-      const date = parse(dateString, 'yyyy-MM-dd', new Date())
-      return format(date, 'dd MMMM yyyy', { locale: ptBR })
-    }
-    if (isMatch(dateString, 'yyyy')) return dateString
-    return 'Data de publicação indisponível'
-  }
+  const { book, selectBook } = props
 
   return (
     <Card>
       <CardPreview>
-        <Image src={formatThumbnail(props.thumbnail)} alt='Book' />
+        <Image
+          src={formatThumbnail(book.volumeInfo?.imageLinks?.thumbnail)}
+          alt='Book'
+        />
       </CardPreview>
-      <CardBox>
-        <Title>{props.title}</Title>
+      <CardContent>
+        <Title>{book.volumeInfo?.title}</Title>
         <Info>
-          por {formatAuthors(props.author)} |{' '}
-          {formatPublishedDate(props.publishedDate)}
+          por {formatAuthors(book.volumeInfo?.authors)} |{' '}
+          {formatPublishedDate(book.volumeInfo?.publishedDate)}
         </Info>
-        <Snippet>{props.textSnippet}</Snippet>
-      </CardBox>
+      </CardContent>
+      <CardActions>
+        <DetailButton onClick={() => selectBook(book)}>
+          Ver detalhes
+        </DetailButton>
+        <FavButton onClick={() => selectBook(book)}>
+          Adicionar aos favoritos
+        </FavButton>
+      </CardActions>
+      <CardContent>
+        <Snippet>{formatSnippet(book.searchInfo?.textSnippet)}</Snippet>
+      </CardContent>
     </Card>
   )
 }
 
 BookCard.propTypes = {
-  thumbnail: PropTypes.string,
-  title: PropTypes.string,
-  author: PropTypes.string,
-  textSnippet: PropTypes.string,
-  publishedDate: PropTypes.string,
+  book: PropTypes.object,
+  selectBook: PropTypes.func,
 }
 
 export default BookCard
