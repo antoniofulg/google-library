@@ -13,9 +13,9 @@ const SearchBar = (props) => {
         setTimer(null)
       }
       setSearch(event.target.value)
-      setTimer(setTimeout(() => props.getBooks(event.target.value), 500))
+      setTimer(setTimeout(() => props.getBySearchTerm(event.target.value), 500))
     },
-    [props.getBooks, timer]
+    [props.getBySearchTerm, timer]
   )
 
   return (
@@ -30,7 +30,7 @@ const SearchBar = (props) => {
 
 SearchBar.propTypes = {
   placeholder: PropTypes.string,
-  getBooks: PropTypes.func,
+  getBySearchTerm: PropTypes.func,
 }
 
 export default SearchBar
