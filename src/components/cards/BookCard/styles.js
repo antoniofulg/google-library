@@ -22,6 +22,7 @@ export const Image = styled.img`
   width: 100%;
   max-width: 140px;
   height: 100%;
+  border: 1px solid #eee;
 `
 
 export const CardBox = styled.div`
@@ -30,7 +31,7 @@ export const CardBox = styled.div`
 
 export const Title = styled.h1`
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin: 0.75rem 0 0.5rem;
 `
 
