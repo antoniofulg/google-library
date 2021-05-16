@@ -6,6 +6,7 @@ export const StyledInput = styled.input`
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   padding-left: 1rem;
   padding-right: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
   display: block;
   border-radius: 0.75rem;
