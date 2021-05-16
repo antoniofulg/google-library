@@ -1,27 +1,54 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import HomeLayout from '../../components/layouts/HomeLayout'
 import SearchBar from '../../components/search-bars/SearchBar'
 import CardsList from '../../components/cards/CardsList'
+import { PageInfo } from './styles'
 import { findBooks } from '../../services/book'
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState('')
   const [books, setBooks] = useState([])
+  const [meta, setMeta] = useState({})
 
-  const getBooks = async (q) => {
+  useEffect(() => {
+    getBooks(searchTerm)
+  }, [searchTerm])
+
+  const getBySearchTerm = (search) => {
+    setSearchTerm(search)
+  }
+
+  const getByPage = (startIndex) => {
+    getBooks(searchTerm, startIndex)
+  }
+
+  const getBooks = async (q, startIndex = 0, maxResults = 8) => {
     if (q) {
       try {
+        q = `intitle:${q}`
         const { totalItems, items } = await findBooks({
           q,
-          maxResults: 6,
-          startIndex: 1,
+          maxResults,
+          startIndex,
         })
         setBooks(items)
-        console.log(totalItems)
-        console.log(books)
+        setMeta({
+          totalItems,
+          startIndex,
+          maxResults: 8,
+        })
       } catch (error) {
         console.log(error)
       }
     }
+  }
+  const showCardList = () => {
+    if (meta.totalItems > 0) {
+      return (
+        <CardsList books={books} getByPage={getByPage} meta={meta}></CardsList>
+      )
+    }
+    return <PageInfo>Não há livros a serem exibidos</PageInfo>
   }
 
   return (
@@ -29,11 +56,11 @@ const Home = () => {
       title='Busque por seus livros favoritos!'
       header={
         <SearchBar
-          getBooks={getBooks}
+          getBySearchTerm={getBySearchTerm}
           placeholder='Ex: Milagre da manhã'
         ></SearchBar>
       }
-      body={<CardsList books={books}></CardsList>}
+      body={showCardList()}
     ></HomeLayout>
   )
 }
