@@ -1,9 +1,14 @@
 import { StyledColumn } from './styles'
 import PropTypes from 'prop-types'
 
-const Column = ({ children, mobile, tablet, desktop }) => {
+const Column = ({ className, children, mobile, tablet, desktop }) => {
   return (
-    <StyledColumn mobile={mobile} tablet={tablet} desktop={desktop}>
+    <StyledColumn
+      className={className}
+      mobile={mobile}
+      tablet={tablet}
+      desktop={desktop}
+    >
       {children}
     </StyledColumn>
   )
@@ -14,6 +19,7 @@ Column.propTypes = {
   desktop: PropTypes.string,
   tablet: PropTypes.string,
   mobile: PropTypes.string,
+  className: PropTypes.string,
 }
 
 export default Column
