@@ -1,6 +1,14 @@
 import styled from 'styled-components'
-import RowComponent from '../../layouts/Row'
 
-export const Row = styled(RowComponent)`
-  margin-top: 16px;
+export const CardsListDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+`
+
+export const SearchInfo = styled.p`
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #555;
 `
