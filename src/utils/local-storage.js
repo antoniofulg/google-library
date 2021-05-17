@@ -1,4 +1,5 @@
 export const addFavoriteBook = (book) => {
+  book.favorite = true
   if (localStorage.getItem('books') === null) {
     localStorage.setItem('books', JSON.stringify([book]))
     return true
