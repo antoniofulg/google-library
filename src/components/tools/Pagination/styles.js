@@ -16,7 +16,8 @@ export const PageNavigation = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
   &:hover {
