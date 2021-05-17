@@ -1,8 +1,5 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
-import { isMatch, format, parse } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
-import placeholder from '../../../assets/img/placeholder.jpg'
 import {
   Image,
   Title,
@@ -17,6 +14,14 @@ import {
   FavButton,
 } from './styles'
 
+import {
+  formatAuthors,
+  formatThumbnail,
+  formatDescription,
+  formatPublishedDate,
+  formatPageCount,
+} from '../../../utils/book-formatter'
+
 const customStyles = {
   content: {
     top: '50%',
@@ -27,39 +32,6 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     overlfow: 'scroll',
   },
-}
-
-const formatAuthors = (authors = []) => {
-  if (authors.length > 1) {
-    const last = authors.pop()
-    return authors.join(', ').concat(' e ', last)
-  }
-  if (authors.length) return authors[0]
-  return 'Autor Desconhecido'
-}
-
-const formatThumbnail = (thumb) => {
-  if (thumb) return thumb
-  return placeholder
-}
-
-const formatSnippet = (text) => {
-  if (text) return text
-  return 'Descrição não disponível'
-}
-
-const formatPublishedDate = (dateString = '') => {
-  if (isMatch(dateString, 'yyyy-MM-dd')) {
-    const date = parse(dateString, 'yyyy-MM-dd', new Date())
-    return format(date, 'dd MMMM yyyy', { locale: ptBR })
-  }
-  if (isMatch(dateString, 'yyyy')) return dateString
-  return 'Data de publicação indisponível'
-}
-
-const formatPageCount = (pages) => {
-  if (pages) return `${pages} páginas`
-  return 'Não informado'
 }
 
 Modal.setAppElement('#root')
@@ -94,7 +66,7 @@ const BookDetail = (props) => {
         </CardContent>
         <CardDescription>
           <Snippet>
-            {formatSnippet(
+            {formatDescription(
               book.volumeInfo?.description || book.searchInfo?.textSnippet
             )}
           </Snippet>

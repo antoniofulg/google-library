@@ -11,37 +11,12 @@ import {
   FavButton,
 } from './styles'
 import PropTypes from 'prop-types'
-import { isMatch, format, parse } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
-import placeholder from '../../../assets/img/placeholder.jpg'
-
-const formatAuthors = (authors = []) => {
-  if (authors.length > 1) {
-    const last = authors.pop()
-    return authors.join(', ').concat(' e ', last)
-  }
-  if (authors.length) return authors[0]
-  return 'Autor Desconhecido'
-}
-
-const formatThumbnail = (thumb) => {
-  if (thumb) return thumb
-  return placeholder
-}
-
-const formatSnippet = (text) => {
-  if (text) return text
-  return 'Descrição não disponível'
-}
-
-const formatPublishedDate = (dateString = '') => {
-  if (isMatch(dateString, 'yyyy-MM-dd')) {
-    const date = parse(dateString, 'yyyy-MM-dd', new Date())
-    return format(date, 'dd MMMM yyyy', { locale: ptBR })
-  }
-  if (isMatch(dateString, 'yyyy')) return dateString
-  return 'Data de publicação indisponível'
-}
+import {
+  formatAuthors,
+  formatThumbnail,
+  formatDescription,
+  formatPublishedDate,
+} from '../../../utils/book-formatter'
 
 const BookCard = (props) => {
   const { book, selectBook, toggleFavoriteBook } = props
@@ -73,7 +48,7 @@ const BookCard = (props) => {
         </FavButton>
       </CardActions>
       <CardContent>
-        <Snippet>{formatSnippet(book.searchInfo?.textSnippet)}</Snippet>
+        <Snippet>{formatDescription(book.searchInfo?.textSnippet)}</Snippet>
       </CardContent>
     </Card>
   )
