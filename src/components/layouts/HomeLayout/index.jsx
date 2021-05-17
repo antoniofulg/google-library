@@ -6,7 +6,7 @@ import Column from '../Column'
 import { Background, Title, Loading, LoadingContainer } from './styles'
 
 const Layout = (props) => {
-  const { title, header, body, loading } = props
+  const { title, searchBar, favButton, body, loading } = props
 
   return (
     <>
@@ -18,7 +18,12 @@ const Layout = (props) => {
             </Column>
           </Row>
           <Row>
-            <Column>{header}</Column>
+            <Column mobile='12' tablet='9' desktop='10'>
+              {searchBar}
+            </Column>
+            <Column mobile='12' tablet='3' desktop='2'>
+              {favButton}
+            </Column>
           </Row>
           {loading ? (
             <Row>
@@ -38,7 +43,8 @@ const Layout = (props) => {
 
 Layout.propTypes = {
   title: PropTypes.string,
-  header: PropTypes.node,
+  searchBar: PropTypes.node,
+  favButton: PropTypes.node,
   body: PropTypes.node,
   toast: PropTypes.node,
   loading: PropTypes.bool,
