@@ -1,19 +1,17 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
 import {
+  DetailButton,
+  FavButton,
+  CardPreview,
+  CardActions,
   Image,
   Title,
   Info,
   Snippet,
-  Card,
   CardContent,
-  CardDescription,
-  CardPreview,
-  CardActions,
-  DetailButton,
-  FavButton,
-} from './styles'
-
+} from '../../../shared/cards'
+import { Card, CardDescription } from './styles'
 import {
   formatAuthors,
   formatThumbnail,

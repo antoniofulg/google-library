@@ -1,5 +1,7 @@
+import { Card } from './styles'
 import {
-  Card,
+  DetailButton,
+  FavButton,
   Image,
   Title,
   Info,
@@ -7,9 +9,7 @@ import {
   CardPreview,
   CardContent,
   CardActions,
-  DetailButton,
-  FavButton,
-} from './styles'
+} from '../../../shared/cards'
 import PropTypes from 'prop-types'
 import {
   formatAuthors,
