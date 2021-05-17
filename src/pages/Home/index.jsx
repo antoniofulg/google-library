@@ -148,7 +148,7 @@ const Home = () => {
       searchBar={
         <SearchBar
           getBySearchTerm={getBySearchTerm}
-          placeholder='Ex: Milagre da manhã'
+          placeholder='Ex: O milagre da manhã'
           disabled={favorites}
         ></SearchBar>
       }
