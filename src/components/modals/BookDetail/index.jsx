@@ -17,6 +17,7 @@ import {
   formatThumbnail,
   formatDescription,
   formatPublishedDate,
+  formatPublisher,
   formatPageCount,
 } from '../../../utils/book-formatter'
 
@@ -59,7 +60,7 @@ const BookDetail = (props) => {
           </Info>
           <Snippet>
             {formatPageCount(book.volumeInfo?.pageCount)} |{' '}
-            {book.volumeInfo?.publisher}
+            {formatPublisher(book.volumeInfo?.publisher)}
           </Snippet>
         </CardContent>
         <CardDescription>

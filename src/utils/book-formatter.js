@@ -8,7 +8,7 @@ export const formatAuthors = (authors = []) => {
     return authors.join(', ').concat(' e ', last)
   }
   if (authors.length) return authors[0]
-  return 'Autor Desconhecido'
+  return 'Autor não informado'
 }
 
 export const formatThumbnail = (thumb) => {
@@ -19,6 +19,11 @@ export const formatThumbnail = (thumb) => {
 export const formatDescription = (text) => {
   if (text) return text
   return 'Descrição não disponível'
+}
+
+export const formatPublisher = (text) => {
+  if (text) return text
+  return 'Editora não informada'
 }
 
 export const formatPublishedDate = (dateString = '') => {
