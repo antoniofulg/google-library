@@ -36,6 +36,7 @@ const CardsList = (props) => {
 
   function closeModal() {
     setIsOpen(false)
+    setSelectedBook({})
   }
 
   const toggleFavoriteBook = (book) => {
