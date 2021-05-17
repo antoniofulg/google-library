@@ -86,9 +86,11 @@ const Home = () => {
 
   const checkBookFavorite = (booksList) => {
     const favoriteBooks = findFavoriteBooks()
-    favoriteBooks.forEach((favBook) => {
-      markBookAsFavorite(favBook, booksList)
-    })
+    if (favoriteBooks.length)
+      favoriteBooks.forEach((favBook) => {
+        markBookAsFavorite(favBook, booksList)
+      })
+    else setBooks(booksList)
   }
 
   const setupFavoritesBooks = async () => {
