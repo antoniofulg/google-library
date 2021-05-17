@@ -16,7 +16,6 @@ const CardsList = (props) => {
   }, [selectedBook])
 
   const selectBook = (book) => {
-    console.log('selectBook', book)
     setSelectedBook(book)
   }
 
@@ -49,13 +48,17 @@ const CardsList = (props) => {
       </Row>
       <Row>
         <CardsListDiv>
-          {books.map((item) => (
-            <BookCard
-              key={item.id}
-              book={item}
-              selectBook={selectBook}
-            ></BookCard>
-          ))}
+          {books?.length ? (
+            books.map((item) => (
+              <BookCard
+                key={item.id}
+                book={item}
+                selectBook={selectBook}
+              ></BookCard>
+            ))
+          ) : (
+            <></>
+          )}
           {selectedBook.id && modalIsOpen ? Modal(selectedBook) : <></>}
         </CardsListDiv>
       </Row>
