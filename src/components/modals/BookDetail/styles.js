@@ -56,7 +56,7 @@ const buttonStyle = `
 border-size: 1px;
 border-style: solid;
 color: #fff;
-padding: 0.25rem 0.75rem;
+padding: 0.25rem 0.5rem;
 border-radius: 0.75rem;
 text-align: center;
 text-decoration: none;
@@ -64,7 +64,10 @@ display: inline-block;
 font-size: 14px;
 font-weight: 600;
 cursor: pointer;
-transition: 0.3s;`
+transition: 0.3s;
+@media only screen and (max-width: 768px) {
+  padding: 0.25rem;
+}`
 
 export const DetailButton = styled.button`
   ${buttonStyle}
