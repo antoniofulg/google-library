@@ -10,6 +10,7 @@ import {
   Snippet,
   Card,
   CardContent,
+  CardDescription,
   CardPreview,
   CardActions,
   DetailButton,
@@ -24,6 +25,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    overlfow: 'scroll',
   },
 }
 
@@ -39,6 +41,11 @@ const formatAuthors = (authors = []) => {
 const formatThumbnail = (thumb) => {
   if (thumb) return thumb
   return placeholder
+}
+
+const formatSnippet = (text) => {
+  if (text) return text
+  return 'Descrição não disponível'
 }
 
 const formatPublishedDate = (dateString = '') => {
@@ -84,8 +91,14 @@ const BookDetail = (props) => {
             {formatPageCount(book.volumeInfo?.pageCount)} |{' '}
             {book.volumeInfo?.publisher}
           </Snippet>
-          <Snippet>{book.volumeInfo?.description}</Snippet>
         </CardContent>
+        <CardDescription>
+          <Snippet>
+            {formatSnippet(
+              book.volumeInfo?.description || book.searchInfo?.textSnippet
+            )}
+          </Snippet>
+        </CardDescription>
         <CardActions>
           <DetailButton onClick={() => closeModal()}>Fechar</DetailButton>
           <FavButton

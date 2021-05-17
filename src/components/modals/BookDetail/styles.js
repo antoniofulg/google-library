@@ -18,6 +18,16 @@ export const CardContent = styled.div`
   padding: 2px 16px;
 `
 
+export const CardDescription = styled.div`
+  padding: 2px 16px;
+  margin-bottom: 20px;
+  height: 300px;
+  overflow-y: scroll;
+  @media only screen and (max-width: 425px) {
+    height: 200px;
+  }
+`
+
 export const CardActions = styled.div`
   display: flex;
   align-items: center;
