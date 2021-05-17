@@ -40,6 +40,48 @@ const Home = () => {
     getBooks(searchTerm)
   }
 
+  const removeBook = (book) => {
+    if (favorites) {
+      const filteredBooks = books.filter((storageBook) => {
+        return storageBook.id !== book.id
+      })
+      setBooks(filteredBooks)
+    } else {
+      unMarkBookAsFavorite(book)
+    }
+  }
+
+  const markBookAsFavorite = (book, booksList = null) => {
+    let filteredBooks = []
+    if (booksList === null) {
+      filteredBooks = books.map((storageBook) => {
+        if (storageBook.id === book.id) storageBook.favorite = true
+        return storageBook
+      })
+    } else {
+      filteredBooks = booksList.map((storageBook) => {
+        if (storageBook.id === book.id) storageBook.favorite = true
+        return storageBook
+      })
+    }
+    setBooks(filteredBooks)
+  }
+
+  const unMarkBookAsFavorite = (book) => {
+    const filteredBooks = books.map((storageBook) => {
+      if (storageBook.id === book.id) storageBook.favorite = false
+      return storageBook
+    })
+    setBooks(filteredBooks)
+  }
+
+  const checkBookFavorite = (booksList) => {
+    const favoriteBooks = findFavoriteBooks()
+    favoriteBooks.forEach((favBook) => {
+      markBookAsFavorite(favBook, booksList)
+    })
+  }
+
   const setupFavoritesBooks = async () => {
     const items = findFavoriteBooks()
     setBooks(items)
@@ -55,7 +97,7 @@ const Home = () => {
           maxResults,
           startIndex,
         })
-        setBooks(items)
+        checkBookFavorite(items)
         setMeta({
           totalItems,
           startIndex,
@@ -80,6 +122,8 @@ const Home = () => {
           getByPage={getByPage}
           favoritesMode={favorites}
           meta={meta}
+          removeBook={removeBook}
+          markBookAsFavorite={markBookAsFavorite}
         ></CardsList>
       )
     }
