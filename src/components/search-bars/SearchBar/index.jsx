@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { StyledInput } from './styles'
 
 const SearchBar = (props) => {
+  const { getBySearchTerm, placeholder } = props
   const [search, setSearch] = useState('')
   const [timer, setTimer] = useState(null)
 
@@ -13,9 +14,9 @@ const SearchBar = (props) => {
         setTimer(null)
       }
       setSearch(event.target.value)
-      setTimer(setTimeout(() => props.getBySearchTerm(event.target.value), 500))
+      setTimer(setTimeout(() => getBySearchTerm(event.target.value), 500))
     },
-    [props.getBySearchTerm, timer]
+    [getBySearchTerm, timer]
   )
 
   return (
@@ -23,7 +24,7 @@ const SearchBar = (props) => {
       value={search}
       onChange={handleSearch}
       type='search'
-      placeholder={props.placeholder}
+      placeholder={placeholder}
     />
   )
 }
