@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StyledInput } from './styles'
 
 const SearchBar = (props) => {
-  const { getBySearchTerm, placeholder } = props
+  const { getBySearchTerm, placeholder, disabled } = props
   const [search, setSearch] = useState('')
   const [timer, setTimer] = useState(null)
 
@@ -25,6 +25,7 @@ const SearchBar = (props) => {
       onChange={handleSearch}
       type='search'
       placeholder={placeholder}
+      disabled={disabled}
     />
   )
 }
@@ -32,6 +33,7 @@ const SearchBar = (props) => {
 SearchBar.propTypes = {
   placeholder: PropTypes.string,
   getBySearchTerm: PropTypes.func,
+  disabled: PropTypes.bool,
 }
 
 export default SearchBar

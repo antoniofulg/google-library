@@ -21,4 +21,8 @@ export const StyledInput = styled.input`
   &:focus {
     border: 1px solid #aaa;
   }
+  &:disabled {
+    background-color: #888;
+    color: #fff;
+  }
 `
