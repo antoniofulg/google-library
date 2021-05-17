@@ -7,7 +7,7 @@ import BookDetailModal from '../../modals/BookDetail'
 import { CardsListDiv, SearchInfo } from './styles'
 
 const CardsList = (props) => {
-  const { books, meta, getByPage } = props
+  const { books, meta, getByPage, favoritesMode } = props
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedBook, setSelectedBook] = useState({})
 
@@ -28,7 +28,17 @@ const CardsList = (props) => {
   }
 
   const getResultsInfo = (meta) => {
-    return `${meta.totalItems} livros encontrados`
+    if (favoritesMode) {
+      if (books?.length > 1) {
+        return `${books?.length} livros adicionado aos favoritos`
+      }
+      if (books?.length) return '1 livro adicionado aos favoritos'
+      return 'Nenhum livro adicionado aos favoritos'
+    }
+    if (meta.totalItems > 1) {
+      return `${meta.totalItems} livros encontrados`
+    }
+    return '1 livro encontrado'
   }
 
   const Modal = (item) => {
@@ -62,9 +72,13 @@ const CardsList = (props) => {
           {selectedBook.id && modalIsOpen ? Modal(selectedBook) : <></>}
         </CardsListDiv>
       </Row>
-      <Row>
-        <Pagination meta={meta} getByPage={getByPage}></Pagination>
-      </Row>
+      {!favoritesMode ? (
+        <Row>
+          <Pagination meta={meta} getByPage={getByPage}></Pagination>
+        </Row>
+      ) : (
+        <></>
+      )}
     </>
   )
 }
@@ -73,6 +87,7 @@ CardsList.propTypes = {
   books: PropTypes.array,
   meta: PropTypes.object,
   getByPage: PropTypes.func,
+  favoritesMode: PropTypes.bool,
 }
 
 export default CardsList
