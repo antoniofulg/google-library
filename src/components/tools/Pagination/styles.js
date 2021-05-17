@@ -8,15 +8,23 @@ export const PaginationDiv = styled.div`
 `
 
 export const PageNavigation = styled.button`
-  border-radius: 12px;
-  margin: 0 1em;
-  padding: 0.75em 1em;
-  font-size: 1rem;
-  font-weight: 600;
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1.75rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
   cursor: pointer;
-  background-color: #fff;
-  color: #555;
-  width: 250px;
+  transition: 0.3s;
+  &:hover {
+    background-color: #2563eb;
+  }
+  &:disabled {
+    background-color: #888;
+  }
 `
 
 export const PageInfo = styled.p`
