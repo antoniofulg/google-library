@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import HomeLayout from '../../components/layouts/HomeLayout'
@@ -20,13 +20,24 @@ const Home = () => {
   const [favorites, setFavorites] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const searchTermInitialMount = useRef(true)
+  const favoritesInitialMount = useRef(true)
+
   useEffect(() => {
-    getBooks(searchTerm)
+    if (searchTermInitialMount.current) {
+      searchTermInitialMount.current = false
+    } else {
+      getBooks(searchTerm)
+    }
   }, [searchTerm])
 
   useEffect(() => {
-    if (favorites) setupFavoritesBooks()
-    else setupBooksSearch()
+    if (favoritesInitialMount.current) {
+      favoritesInitialMount.current = false
+    } else {
+      if (favorites) setupFavoritesBooks()
+      else setupBooksSearch()
+    }
   }, [favorites])
 
   const toggleFavorites = () => {
