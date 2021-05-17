@@ -8,6 +8,11 @@ import { ToggleButton, PageInfo } from './styles'
 import { findBooks } from '../../services/book'
 import { findFavoriteBooks } from '../../utils/local-storage'
 
+const findFavoriteMap = (book, bookToFind, favorite = true) => {
+  if (book.id === bookToFind.id) book.favorite = favorite
+  return book
+}
+
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [books, setBooks] = useState([])
@@ -51,27 +56,20 @@ const Home = () => {
     }
   }
 
-  const markBookAsFavorite = (book, booksList = null) => {
+  const markBookAsFavorite = (bookToFind, booksList = null) => {
     let filteredBooks = []
     if (booksList === null) {
-      filteredBooks = books.map((storageBook) => {
-        if (storageBook.id === book.id) storageBook.favorite = true
-        return storageBook
-      })
+      filteredBooks = books.map((book) => findFavoriteMap(book, bookToFind))
     } else {
-      filteredBooks = booksList.map((storageBook) => {
-        if (storageBook.id === book.id) storageBook.favorite = true
-        return storageBook
-      })
+      filteredBooks = booksList.map((book) => findFavoriteMap(book, bookToFind))
     }
     setBooks(filteredBooks)
   }
 
-  const unMarkBookAsFavorite = (book) => {
-    const filteredBooks = books.map((storageBook) => {
-      if (storageBook.id === book.id) storageBook.favorite = false
-      return storageBook
-    })
+  const unMarkBookAsFavorite = (bookToFind) => {
+    const filteredBooks = books.map((book) =>
+      findFavoriteMap(book, bookToFind, false)
+    )
     setBooks(filteredBooks)
   }
 
