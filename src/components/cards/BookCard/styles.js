@@ -60,8 +60,9 @@ export const Snippet = styled.p`
 `
 
 const buttonStyle = `
-border: none;
-color: white;
+border-size: 1px;
+border-style: solid;
+color: #fff;
 padding: 0.25rem 0.75rem;
 border-radius: 0.75rem;
 text-align: center;
@@ -75,15 +76,21 @@ transition: 0.3s;`
 export const DetailButton = styled.button`
   ${buttonStyle}
   background-color: #3b82f6;
+  border-color: #3b82f6;
   &:hover {
     background-color: #2563eb;
+    border-color: #2563eb;
   }
 `
 
 export const FavButton = styled.button`
   ${buttonStyle}
-  background-color: #f59e0b;
+  background-color: ${(props) => (props.favorites ? '#fff' : '#f59e0b')};
+  color: ${(props) => (props.favorites ? '#f59e0b' : '#fff')};
+  border-color: #f59e0b;
   &:hover {
-    background-color: #d97706;
+    background-color: ${(props) => (props.favorites ? '#ddd' : '#d97706')};
+    color: ${(props) => (props.favorites ? '#d97706' : '#fff')};
+    border-color: #d97706;
   }
 `

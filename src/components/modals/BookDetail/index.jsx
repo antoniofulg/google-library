@@ -58,7 +58,7 @@ const formatPageCount = (pages) => {
 Modal.setAppElement('#root')
 
 const BookDetail = (props) => {
-  const { isOpen, closeModal, book } = props
+  const { isOpen, closeModal, book, toggleFavoriteBook } = props
 
   return (
     <Modal
@@ -88,8 +88,16 @@ const BookDetail = (props) => {
         </CardContent>
         <CardActions>
           <DetailButton onClick={() => closeModal()}>Fechar</DetailButton>
-          <FavButton onClick={() => console.log('adicionar aos favoritos')}>
-            Adicionar aos favoritos
+          <FavButton
+            favorites={book.favorite}
+            onClick={() => {
+              toggleFavoriteBook(book)
+              closeModal()
+            }}
+          >
+            {book.favorite
+              ? 'Remover dos favoritos'
+              : 'Adicionar aos favoritos'}
           </FavButton>
         </CardActions>
       </Card>
@@ -101,6 +109,7 @@ BookDetail.propTypes = {
   isOpen: PropTypes.bool,
   book: PropTypes.object,
   closeModal: PropTypes.func,
+  toggleFavoriteBook: PropTypes.func,
 }
 
 export default BookDetail

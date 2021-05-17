@@ -44,7 +44,7 @@ const formatPublishedDate = (dateString = '') => {
 }
 
 const BookCard = (props) => {
-  const { book, selectBook } = props
+  const { book, selectBook, toggleFavoriteBook } = props
 
   return (
     <Card>
@@ -65,8 +65,11 @@ const BookCard = (props) => {
         <DetailButton onClick={() => selectBook(book)}>
           Ver detalhes
         </DetailButton>
-        <FavButton onClick={() => selectBook(book)}>
-          Adicionar aos favoritos
+        <FavButton
+          favorites={book.favorite}
+          onClick={() => toggleFavoriteBook(book)}
+        >
+          {book.favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
         </FavButton>
       </CardActions>
       <CardContent>
@@ -79,6 +82,7 @@ const BookCard = (props) => {
 BookCard.propTypes = {
   book: PropTypes.object,
   selectBook: PropTypes.func,
+  toggleFavoriteBook: PropTypes.func,
 }
 
 export default BookCard

@@ -52,36 +52,38 @@ export const Snippet = styled.p`
   margin-top: 0.5rem;
 `
 
+const buttonStyle = `
+border-size: 1px;
+border-style: solid;
+color: #fff;
+padding: 0.25rem 0.75rem;
+border-radius: 0.75rem;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: 0.3s;`
+
 export const DetailButton = styled.button`
+  ${buttonStyle}
   background-color: #3b82f6;
-  border: none;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.75rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+  border-color: #3b82f6;
   &:hover {
     background-color: #2563eb;
+    border-color: #2563eb;
   }
 `
 
 export const FavButton = styled.button`
-  background-color: #f59e0b;
-  border: none;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.75rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+  ${buttonStyle}
+  background-color: ${(props) => (props.favorites ? '#fff' : '#f59e0b')};
+  color: ${(props) => (props.favorites ? '#f59e0b' : '#fff')};
+  border-color: #f59e0b;
   &:hover {
-    background-color: #d97706;
+    background-color: ${(props) => (props.favorites ? '#ddd' : '#d97706')};
+    color: ${(props) => (props.favorites ? '#d97706' : '#fff')};
+    border-color: #d97706;
   }
 `

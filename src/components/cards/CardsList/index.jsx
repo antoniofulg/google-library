@@ -4,10 +4,21 @@ import BookCard from '../BookCard'
 import Pagination from '../../tools/Pagination'
 import Row from '../../layouts/Row'
 import BookDetailModal from '../../modals/BookDetail'
+import {
+  addFavoriteBook,
+  removeFavoriteBook,
+} from '../../../utils/local-storage'
 import { CardsListDiv, SearchInfo } from './styles'
 
 const CardsList = (props) => {
-  const { books, meta, getByPage, favoritesMode } = props
+  const {
+    books,
+    meta,
+    getByPage,
+    favoritesMode,
+    removeBook,
+    markBookAsFavorite,
+  } = props
   const [modalIsOpen, setIsOpen] = useState(false)
   const [selectedBook, setSelectedBook] = useState({})
 
@@ -25,6 +36,16 @@ const CardsList = (props) => {
 
   function closeModal() {
     setIsOpen(false)
+  }
+
+  const toggleFavoriteBook = (book) => {
+    if (book.favorite) {
+      removeFavoriteBook(book)
+      removeBook(book)
+    } else {
+      addFavoriteBook(book)
+      markBookAsFavorite(book)
+    }
   }
 
   const getResultsInfo = (meta) => {
@@ -47,6 +68,7 @@ const CardsList = (props) => {
         isOpen={modalIsOpen}
         closeModal={closeModal}
         book={item}
+        toggleFavoriteBook={toggleFavoriteBook}
       ></BookDetailModal>
     )
   }
@@ -64,6 +86,7 @@ const CardsList = (props) => {
                 key={item.id}
                 book={item}
                 selectBook={selectBook}
+                toggleFavoriteBook={toggleFavoriteBook}
               ></BookCard>
             ))
           ) : (
@@ -88,6 +111,8 @@ CardsList.propTypes = {
   meta: PropTypes.object,
   getByPage: PropTypes.func,
   favoritesMode: PropTypes.bool,
+  removeBook: PropTypes.func,
+  markBookAsFavorite: PropTypes.func,
 }
 
 export default CardsList
