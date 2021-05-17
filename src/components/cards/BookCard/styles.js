@@ -10,7 +10,7 @@ export const Card = styled.div`
   }
   border-radius: 1.25rem;
   width: 100%;
-  max-width: 370px;
+  max-width: 320px;
   margin-bottom: 20px;
 `
 
@@ -59,35 +59,30 @@ export const Snippet = styled.p`
   margin-top: 0.5rem;
 `
 
+const buttonStyle = `
+border: none;
+color: white;
+padding: 0.25rem 0.75rem;
+border-radius: 0.75rem;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: 0.3s;`
+
 export const DetailButton = styled.button`
+  ${buttonStyle}
   background-color: #3b82f6;
-  border: none;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.75rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
   &:hover {
     background-color: #2563eb;
   }
 `
 
 export const FavButton = styled.button`
+  ${buttonStyle}
   background-color: #f59e0b;
-  border: none;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.75rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
   &:hover {
     background-color: #d97706;
   }

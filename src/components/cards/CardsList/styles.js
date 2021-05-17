@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const CardsListDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: stretch;
 `
 

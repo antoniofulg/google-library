@@ -25,10 +25,24 @@ export const PageNavigation = styled.button`
   &:disabled {
     background-color: #888;
   }
+  @media only screen and (max-width: 425px) and (min-width: 321px) {
+    order: 1;
+    padding: 0.25rem 1.25rem;
+  }
+  @media only screen and (max-width: 320px) {
+    order: 1;
+  }
 `
 
 export const PageInfo = styled.p`
   font-size: 1rem;
   font-weight: 600;
   color: #555;
+  @media only screen and (max-width: 425px) {
+    order: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
 `
